@@ -26,7 +26,6 @@ export default function Pedidos() {
                 { nome: "Livro", quantidade: 1, precoUnitario: "R$ 30,00", total: "R$ 30,00" },
                 { nome: "Café", quantidade: 3, precoUnitario: "R$ 15,00", total: "R$ 45,00" },
                 { nome: "Curso", quantidade: 1, precoUnitario: "R$ 200,00", total: "R$ 200,00" },
-
             ],
         });
         setModalOpen(true);
@@ -47,62 +46,66 @@ export default function Pedidos() {
     return (
         <div style={{ background: "#0f172a", color: "#fff", minHeight: "100vh" }}>
             <Header />
-            <div style={{ padding: "2rem" }}>
+            <div style={styles.container}>
                 <h2>Pedidos em andamento</h2>
-                <table style={styles.table}>
-                    <thead style={{ backgroundColor: "#c5c9c6" }}>
-                        <tr style={styles.tbRow}>
-                            <th style={styles.tbCol}>ID</th>
-                            <th style={styles.tbCol}>Valor</th>
-                            <th style={styles.tbCol}>Data</th>
-                            <th style={styles.tbCol}>Cliente</th>
-                            <th style={styles.tbCol}>Hora</th>
-                            <th style={styles.tbCol}>Detalhes</th>
-                            <th style={styles.tbCol}>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {pedidosAndamento.map((p) => (
-                            <tr style={styles.tbRow} key={p.id}>
-                                <td style={styles.tbCol}>{p.id}</td>
-                                <td style={styles.tbCol}>{p.valor}</td>
-                                <td style={styles.tbCol}>{p.data}</td>
-                                <td style={styles.tbCol}>{p.cliente}</td>
-                                <td style={styles.tbCol}>{p.hora}</td>
-                                <td style={styles.tbCol}><button onClick={() => abrirModal()}>Ver detalhes</button></td>
-                                <td style={styles.tbCol}><StatusSelect initial={p.status} /></td>
+                <div style={styles.tableWrapper}>
+                    <table style={styles.table}>
+                        <thead style={{ backgroundColor: "#c5c9c6" }}>
+                            <tr style={styles.tbRow}>
+                                <th style={styles.tbCol}>ID</th>
+                                <th style={styles.tbCol}>Valor</th>
+                                <th style={styles.tbCol}>Data</th>
+                                <th style={styles.tbCol}>Cliente</th>
+                                <th style={styles.tbCol}>Hora</th>
+                                <th style={styles.tbCol}>Detalhes</th>
+                                <th style={styles.tbCol}>Status</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {pedidosAndamento.map((p) => (
+                                <tr style={styles.tbRow} key={p.id}>
+                                    <td style={styles.tbCol}>{p.id}</td>
+                                    <td style={styles.tbCol}>{p.valor}</td>
+                                    <td style={styles.tbCol}>{p.data}</td>
+                                    <td style={styles.tbCol}>{p.cliente}</td>
+                                    <td style={styles.tbCol}>{p.hora}</td>
+                                    <td style={styles.tbCol}><button onClick={() => abrirModal()}>Ver detalhes</button></td>
+                                    <td style={styles.tbCol}><StatusSelect initial={p.status} /></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
                 <h2 style={{ marginTop: "2rem" }}>Pedidos encerrados</h2>
-                <table style={styles.table}>
-                    <thead style={{ backgroundColor: "#c5c9c6" }}>
-                        <tr style={styles.tbRow}>
-                            <th style={styles.tbCol}>ID</th>
-                            <th style={styles.tbCol}>Valor</th>
-                            <th style={styles.tbCol}>Data</th>
-                            <th style={styles.tbCol}>Cliente</th>
-                            <th style={styles.tbCol}>Hora</th>
-                            <th style={styles.tbCol}>Detalhes</th>
-                            <th style={styles.tbCol}>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {pedidosEncerrados.map((p, i) => (
-                            <tr style={styles.tbRow} key={i}>
-                                <td style={styles.tbCol}>{p.id}</td>
-                                <td style={styles.tbCol}>{p.valor}</td>
-                                <td style={styles.tbCol}>{p.data}</td>
-                                <td style={styles.tbCol}>{p.cliente}</td>
-                                <td style={styles.tbCol}>{p.hora}</td>
-                                <td style={styles.tbCol}><button onClick={() => abrirModal()}>Ver detalhes</button></td>
-                                <td style={styles.tbCol}><StatusTag status={p.status as any} /></td>
+                <div style={styles.tableWrapper}>
+                    <table style={styles.table}>
+                        <thead style={{ backgroundColor: "#c5c9c6" }}>
+                            <tr style={styles.tbRow}>
+                                <th style={styles.tbCol}>ID</th>
+                                <th style={styles.tbCol}>Valor</th>
+                                <th style={styles.tbCol}>Data</th>
+                                <th style={styles.tbCol}>Cliente</th>
+                                <th style={styles.tbCol}>Hora</th>
+                                <th style={styles.tbCol}>Detalhes</th>
+                                <th style={styles.tbCol}>Status</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {pedidosEncerrados.map((p, i) => (
+                                <tr style={styles.tbRow} key={i}>
+                                    <td style={styles.tbCol}>{p.id}</td>
+                                    <td style={styles.tbCol}>{p.valor}</td>
+                                    <td style={styles.tbCol}>{p.data}</td>
+                                    <td style={styles.tbCol}>{p.cliente}</td>
+                                    <td style={styles.tbCol}>{p.hora}</td>
+                                    <td style={styles.tbCol}><button onClick={() => abrirModal()}>Ver detalhes</button></td>
+                                    <td style={styles.tbCol}><StatusTag status={p.status as any} /></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <PedidoModal
@@ -117,24 +120,32 @@ export default function Pedidos() {
 }
 
 const styles: { [key: string]: React.CSSProperties } = {
+    container: {
+        padding: "2rem",
+        maxWidth: "100%",
+        overflowX: "hidden",
+    },
+    tableWrapper: {
+        overflowX: "auto",
+        overflowY: "auto",
+        maxWidth: "100%",
+    },
     table: {
+        minWidth: "900px",
         width: "100%",
         background: "#fff",
         color: "#000",
         borderCollapse: "collapse",
         borderRadius: "10px",
-        padding: "1rem",
         marginTop: "1rem",
-        overflow: "hidden",
     },
     tbCol: {
-        margin: "0",
-        padding: "3px",
-        borderRight: "1px solid #0d182c"
+        padding: "8px",
+        borderRight: "1px solid #0d182c",
+        whiteSpace: "nowrap",
     },
     tbRow: {
         borderBottom: "1px solid #0d182c",
         textAlign: "center"
-    }
-
+    },
 };
