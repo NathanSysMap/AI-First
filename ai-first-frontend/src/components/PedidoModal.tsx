@@ -1,8 +1,10 @@
 import React from "react";
+import logo from "../assets/logo.png";
 
 export interface ItemPedido {
     nome: string;
     detalhes?: string;
+    imagemUrl?: string;
     quantidade: number;
     precoUnitario: string;
     total: string;
@@ -22,7 +24,11 @@ export default function PedidoModal({ isOpen, onClose, idPedido, valorPedido, it
     return (
         <div style={styles.overlay}>
             <div style={styles.modal}>
-                <h2 style={{ marginBottom: "1rem" }}>Detalhes do Pedido</h2>
+                <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+                    <img src={logo} alt="Logo" style={{ height: "40px" }} />
+                </div>
+
+                <h2 style={{ marginBottom: "1rem", textAlign: "center" }}>Detalhes do Pedido</h2>
                 <hr style={{ borderColor: "#334155", marginBottom: "1rem" }} />
 
                 <p style={{ marginBottom: "1rem" }}>
@@ -35,37 +41,43 @@ export default function PedidoModal({ isOpen, onClose, idPedido, valorPedido, it
 
                 <h3 style={{ marginBottom: "0.5rem" }}>Itens do Pedido</h3>
 
-                <table style={styles.table}>
-                    <thead>
-                        <tr style={styles.tbRow}>
-                            <th style={styles.tbCol}>Nome do Produto</th>
-                            <th style={styles.tbCol}>Quantidade</th>
-                            <th style={styles.tbCol}>Preço Unitário</th>
-                            <th>Total do Item</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {itens.map((item, index) => (
-                            <tr style={styles.tbRow} key={index}>
-                                <td style={styles.tbCol}>
-                                    {item.nome}
-                                    {item.detalhes && (
-                                        <div style={{ fontSize: "0.85rem", color: "#94a3b8" }}>
-                                            {item.detalhes}
-                                        </div>
-                                    )}
-                                </td>
-                                <td style={styles.tbCol}>{item.quantidade}</td>
-                                <td style={styles.tbCol}>{item.precoUnitario}</td>
-                                <td>{item.total}</td>
+                <div style={{ overflowX: "auto", overflowY: "auto", maxHeight: "300px" }}>
+                    <table style={styles.table}>
+                        <thead>
+                            <tr style={styles.headerRow}>
+                                <th style={styles.headerCol}>Imagem</th>
+                                <th style={styles.headerCol}>Nome do Produto</th>
+                                <th style={styles.headerCol}>Quantidade</th>
+                                <th style={styles.headerCol}>Preço Unitário</th>
+                                <th style={styles.headerCol}>Total do Item</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {itens.map((item, index) => (
+                                <tr style={styles.tbRow} key={index}>
+                                    <td style={styles.tbCol}>
+                                        <img src={item.imagemUrl || "/placeholder.png"} alt={item.nome} style={{ width: "40px", borderRadius: "4px" }} />
+                                    </td>
+                                    <td style={styles.tbCol}>
+                                        <strong>{item.nome}</strong>
+                                        {item.detalhes && (
+                                            <div style={{ fontSize: "0.85rem", color: "#475569" }}>
+                                                {item.detalhes}
+                                            </div>
+                                        )}
+                                    </td>
+                                    <td style={styles.tbCol}>{item.quantidade}</td>
+                                    <td style={styles.tbCol}>{item.precoUnitario}</td>
+                                    <td style={styles.tbCol}>{item.total}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
-                <button onClick={onClose} style={styles.button}>
-                    Fechar
-                </button>
+                <div style={{ textAlign: "center" }}>
+                    <button onClick={onClose} style={styles.button}>Fechar</button>
+                </div>
             </div>
         </div>
     );
@@ -86,31 +98,42 @@ const styles: { [key: string]: React.CSSProperties } = {
         color: "#fff",
         padding: "2rem",
         borderRadius: "12px",
-        minWidth: "500px",
+        minWidth: "600px",
+        maxHeight: "80vh",
+        overflow: "auto"
     },
     table: {
         width: "100%",
         borderCollapse: "collapse",
-        marginBottom: "1.5rem",
-        overflowX: "auto",
-        overflowY: "auto"
+        backgroundColor: "#fff",
+        color: "#0f172a",
+        borderRadius: "8px",
+        minWidth: "700px"
+    },
+    headerRow: {
+        backgroundColor: "#1e40af",
+        color: "#fff",
+        textAlign: "center",
+    },
+    headerCol: {
+        padding: "8px",
+    },
+    tbRow: {
+        borderBottom: "1px solid #e2e8f0",
+        textAlign: "center"
+    },
+    tbCol: {
+        padding: "10px",
     },
     button: {
         padding: "0.5rem 1.5rem",
-        backgroundColor: "#18244c",
-        color: "#fff",
+        backgroundColor: "#38bdf8",
+        color: "#0f172a",
         border: "none",
         borderRadius: "8px",
         cursor: "pointer",
         fontSize: "1rem",
+        fontWeight: "bold",
+        marginTop: "5px"
     },
-    tbCol: {
-        margin: "0",
-        padding: "3px",
-        borderRight: "1px solid #4f5250"
-    },
-    tbRow: {
-        borderBottom: "1px solid #4f5250",
-        textAlign: "center"
-    }
 };
