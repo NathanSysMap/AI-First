@@ -15,6 +15,7 @@ export default function Header() {
           <button onClick={() => _navigate('/pedidos')} style={isActive('/pedidos') ? styles.navButtonActive : styles.navButton}>PEDIDOS</button>
           <button onClick={() => _navigate('/catalogo')} style={isActive('/catalogo') ? styles.navButtonActive : styles.navButton}>CATÁLOGO</button>
           <button onClick={() => _navigate('/assistente')} style={isActive('/assistente') ? styles.navButtonActive : styles.navButton}>MEU ASSISTENTE</button>
+          <button onClick={() => _navigate('/empresa')} style={isActive('/empresa') ? styles.navButtonActive : styles.navButton}>DADOS DA EMPRESA</button>
         </nav>
         <img
           src="https://i.pravatar.cc/40"
