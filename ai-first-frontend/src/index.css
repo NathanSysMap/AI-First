@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #0F172A;
+    --foreground: #f8fafc;
+    
+    --primary: #7DD3FC;
+    --primary-foreground: #0F172A;
+    
+    --secondary: #38bdf8;
+    --secondary-foreground: #0F172A;
+    
+    --accent: #bae6fd;
+    --accent-foreground: #0F172A;
+    
+    --success: #86efac;
+    --success-foreground: #0F172A;
+    
+    --warning: #fde68a;
+    --warning-foreground: #0F172A;
+    
+    --danger: #fca5a5;
+    --danger-foreground: #0F172A;
+    
+    --card: #1e293b;
+    --card-foreground: #f8fafc;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .scrollable-table {
+    @apply w-full overflow-auto;
+    max-height: 60vh;
+  }
+  
+  .table-container {
+    @apply w-full overflow-x-auto overflow-y-auto rounded-lg bg-card;
+    max-height: 60vh;
+  }
+  
+  .table-base {
+    @apply min-w-full divide-y divide-gray-700;
+  }
+  
+  .table-header {
+    @apply bg-slate-800 text-left text-sm font-medium text-gray-200 uppercase tracking-wider;
+  }
+  
+  .table-header th {
+    @apply px-4 py-3 sticky top-0 z-10;
+  }
+  
+  .table-body {
+    @apply divide-y divide-gray-700 bg-slate-900/50;
+  }
+  
+  .table-row {
+    @apply hover:bg-slate-800/70 transition-colors;
+  }
+  
+  .table-cell {
+    @apply px-4 py-3 text-sm;
+  }
+  
+  .form-container {
+    @apply space-y-6 bg-card p-6 rounded-lg shadow-lg max-w-md w-full mx-auto;
+  }
+  
+  .input-group {
+    @apply space-y-2;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium;
+  }
+  
+  .form-input {
+    @apply w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background px-4 py-2 text-sm;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/80 focus:ring-primary;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 focus:ring-secondary;
+  }
+  
+  .btn-outline {
+    @apply border border-input bg-transparent hover:bg-slate-800 focus:ring-slate-400;
+  }
+  
+  .btn-ghost {
+    @apply hover:bg-slate-800/50 focus:ring-slate-400;
+  }
+  
+  .btn-danger {
+    @apply bg-danger text-danger-foreground hover:bg-danger/80 focus:ring-danger;
+  }
+  
+  .status-completed {
+    @apply bg-success/20 text-success rounded px-2 py-1 text-xs font-medium;
+  }
+  
+  .status-rejected {
+    @apply bg-danger/20 text-danger rounded px-2 py-1 text-xs font-medium;
+  }
+  
+  .status-suspended {
+    @apply bg-warning/20 text-warning rounded px-2 py-1 text-xs font-medium;
+  }
+  
+  .status-default {
+    @apply bg-slate-700/50 text-slate-300 rounded px-2 py-1 text-xs font-medium;
+  }
+}
