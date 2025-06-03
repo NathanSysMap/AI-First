@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { AuthUser } from "../types";
 
+const API_BASE = import.meta.env.VITE_API_BASE || "";
 
 interface AuthContextType{
     user: AuthUser | null;
@@ -45,7 +46,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const login = async (email: string, password: string): Promise<boolean> => {
         try {
-            const response = await fetch("http://localhost:3001/auth/login", {
+            const response = await fetch(`${API_BASE}/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
