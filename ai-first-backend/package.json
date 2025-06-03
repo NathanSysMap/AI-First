@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsup src/index.ts --watch --onSuccess \"node dist/index.js\"",
     "generate": "prisma generate",
-    "build:frontend": "npm run build --prefix ../ai-first-frontend",
+    "build:frontend": "npm install --prefix ../ai-first-frontend && npm run build --prefix ../ai-first-frontend",
     "build:backend": "tsup src/index.ts --format esm --out-dir dist --splitting --clean",
     "build": "npm run build:frontend && npm run build:backend",
     "start": "node dist/index.js"
