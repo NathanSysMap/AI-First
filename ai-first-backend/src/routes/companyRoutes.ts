@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createCompanyHandler, getCompanyHandler, getCompanyUsersHandler, updateCompanyHandler } from "../controllers/companyController";
-import { isAuthenticated } from "../middlewares/authMiddleware";
+import { createCompanyHandler, getCompanyHandler, getCompanyUsersHandler, updateCompanyHandler } from "../controllers/companyController.js";
+import { isAuthenticated } from "../middlewares/authMiddleware.js";
 
 
 const companyRouter = Router();

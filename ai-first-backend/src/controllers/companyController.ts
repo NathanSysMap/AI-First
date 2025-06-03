@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createCompany, getCompany, getCompanyUsers, updateCompany } from "../services/companyService";
+import { createCompany, getCompany, getCompanyUsers, updateCompany } from "../services/companyService.js";
 import { userRequest } from "../types/express";
 import { error } from "console";
 

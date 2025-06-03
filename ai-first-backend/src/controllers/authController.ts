@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { userRequest } from "../types/express";
-import { register, login, updateUser, resolveTenantByWhatsApp } from "../services/authService";
-import { uploadImage } from "../services/uploadService";
+import { register, login, updateUser, resolveTenantByWhatsApp } from "../services/authService.js";
+import { uploadImage } from "../services/uploadService.js";
 
 export async function registerUserHandler(req:Request, res:Response) {
     const {email, password, name, companyId} = req.body;
@@ -21,7 +21,7 @@ export async function loginUserHandler(req:Request, res:Response) {
 
     try{
         const result = await login(email, password);
-        res.status(201).json(result);
+        res.status(200).json(result);
         return;
     } catch(err: any){
         res.status(400).json({error: err.message});

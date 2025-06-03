@@ -1,8 +1,8 @@
 import { Response } from "express";
-import { uploadAgentDocument } from "../services/uploadService";
+import { uploadAgentDocument } from "../services/uploadService.js";
 import { userRequest } from "../types/express";
 import { PrismaClient } from "@prisma/client";
-import { getPromptByTenant, upsertPrompt } from "../services/agentService";
+import { getPromptByTenant, upsertPrompt } from "../services/agentService.js";
 import { error } from "console";
 
 const prisma = new PrismaClient();

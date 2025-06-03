@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { generatePaymentLink } from "../services/paymentService";
+import { generatePaymentLink } from "../services/paymentService.js";
 
 export async function generatePaymentLinkHandler(req: Request, res: Response) {
     try {

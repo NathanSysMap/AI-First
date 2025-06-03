@@ -1,6 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
 import { v4 as uuidv4 } from "uuid";
-import pdfParse from "pdf-parse";
 import mammoth from "mammoth";
 import e from "express";
 
@@ -48,6 +47,7 @@ export async function uploadAgentDocument(file: Express.Multer.File, tenantId: s
     let extractedText = "";
     try {
         if (extension === "pdf") {
+            const pdfParse = await import("pdf-parse").then(mod => mod.default);
             const parsed = await pdfParse(file.buffer);
             extractedText = parsed.text || "";
         } else if (extension === "docx") {

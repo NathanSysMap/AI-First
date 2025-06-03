@@ -1,5 +1,5 @@
 import { error } from "console";
-import { upsertCart, getCart, removeItemFromCart, calcShippingCart, getCartDimensions } from "../services/cartService";
+import { upsertCart, getCart, removeItemFromCart, calcShippingCart, getCartDimensions } from "../services/cartService.js";
 import { Request, Response } from "express";
 
 export async function upsertCartHandler(req:Request, res:Response) {

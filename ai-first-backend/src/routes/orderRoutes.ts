@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { isAuthenticated } from "../middlewares/authMiddleware";
-import { createOrderHandler, getOrdersByTenantHandler, updateOrderStatusHandler, getOrdersByCustomerHandler } from "../controllers/orderController";
+import { isAuthenticated } from "../middlewares/authMiddleware.js";
+import { createOrderHandler, getOrdersByTenantHandler, updateOrderStatusHandler, getOrdersByCustomerHandler } from "../controllers/orderController.js";
 
 const orderRouter =  Router();
 

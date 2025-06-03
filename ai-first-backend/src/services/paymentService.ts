@@ -1,5 +1,5 @@
 import { title } from "process";
-import mercadoPagoClient from "../utils/mercadoPagoClient";
+import mercadoPagoClient from "../utils/mercadoPagoClient.js";
 import { Preference } from "mercadopago";
 import { PrismaClient } from "@prisma/client";
 import { response } from "express";

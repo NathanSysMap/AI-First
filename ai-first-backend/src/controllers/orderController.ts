@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createOrder, getOrdersByTenant, updateOrderStatus, getOrdersByCustomer } from "../services/orderService";
+import { createOrder, getOrdersByTenant, updateOrderStatus, getOrdersByCustomer } from "../services/orderService.js";
 import { error } from "console";
 import { userRequest } from "../types/express";
 

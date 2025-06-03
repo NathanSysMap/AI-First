@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import mercadoPagoClient from "../utils/mercadoPagoClient";
+import mercadoPagoClient from "../utils/mercadoPagoClient.js";
 import { Payment } from "mercadopago";
 
 const prisma = new PrismaClient();

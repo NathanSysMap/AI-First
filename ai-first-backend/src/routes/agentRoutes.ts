@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getPromptByTenantHandler, uploadAgentDocumentHandler, upsertPromptHandler } from "../controllers/agentController";
-import { isAuthenticated } from "../middlewares/authMiddleware";
-import { upload } from "../middlewares/uploadMiddleware";
+import { getPromptByTenantHandler, uploadAgentDocumentHandler, upsertPromptHandler } from "../controllers/agentController.js";
+import { isAuthenticated } from "../middlewares/authMiddleware.js";
+import { upload } from "../middlewares/uploadMiddleware.js";
 
 const agentRouter = Router();
 

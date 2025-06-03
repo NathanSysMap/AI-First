@@ -1,6 +1,6 @@
 import { Request, Response, RequestHandler } from "express";
-import { createProduct, getProductById, getProductByTenant, updateProduct, deleteProduct } from "../services/productService";
-import { uploadImage } from "../services/uploadService";
+import { createProduct, getProductById, getProductByTenant, updateProduct, deleteProduct } from "../services/productService.js";
+import { uploadImage } from "../services/uploadService.js";
 import { error } from "console";
 
 

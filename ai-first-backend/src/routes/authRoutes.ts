@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { registerUserHandler, loginUserHandler, updateUserHandler, uploadProfileImageHandler, resolveTenantHandler } from "../controllers/authController";
-import { isAuthenticated } from "../middlewares/authMiddleware";
-import { upload } from "../middlewares/uploadMiddleware";
+import { registerUserHandler, loginUserHandler, updateUserHandler, uploadProfileImageHandler, resolveTenantHandler } from "../controllers/authController.js";
+import { isAuthenticated } from "../middlewares/authMiddleware.js";
+import { upload } from "../middlewares/uploadMiddleware.js";
 
 const authRouter = Router();
 

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { listPublicProductsHandler, uploadProductImageHandler, createProductHandler, listProductsHandler, getProductHandler, updateProductHandler, deleteProductHandler } from "../controllers/productController";
-import { isAuthenticated } from "../middlewares/authMiddleware";
-import { upload } from "../middlewares/uploadMiddleware";
+import { listPublicProductsHandler, uploadProductImageHandler, createProductHandler, listProductsHandler, getProductHandler, updateProductHandler, deleteProductHandler } from "../controllers/productController.js";
+import { isAuthenticated } from "../middlewares/authMiddleware.js";
+import { upload } from "../middlewares/uploadMiddleware.js";
 
 const productRouter = Router();
 

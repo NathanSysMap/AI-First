@@ -1,7 +1,7 @@
 import { useAuth } from "../context/AuthContext";
 import { Product, Order } from "../types";
 
-const API_BASE = "http://localhost:3001";
+const API_BASE = import.meta.env.VITE_API_BASE || "";
 
 export const useApi = () => {
     const { token } = useAuth();

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createCustomer, getCustomerByCPF } from "../services/customerService";
+import { createCustomer, getCustomerByCPF } from "../services/customerService.js";
 
 export async function createCustomerHandler(req: Request, res: Response) {
     try {
