@@ -19,7 +19,10 @@ export async function uploadImage(file: Express.Multer.File, bucket: string): Pr
     }
 
     const { data } = supabase.storage.from(bucket).getPublicUrl(fileName);
-    return data.publicUrl;
+
+    const fixedUrl = data.publicUrl.replace(/([^:]\/)\/+/g, "1").replace(/ /g, "%20");
+
+    return fixedUrl;
 }
 
 export async function uploadAgentDocument(file: Express.Multer.File, tenantId: string): Promise<{ fileUrl: string; extractedText: string }> {

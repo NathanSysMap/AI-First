@@ -230,7 +230,8 @@ export async function calcShippingCart(cartId: string, destinyZipCode: string) {
         throw new Error("Nenhuma opção de frete encontrada!");
     }
 
-    const shippingOptions = data.map((option: any) => ({
+    const shippingOptions = data.filter((option: any) => option.pice != null && option.delivery_time != null)
+    .map((option: any) => ({
         shippingMethod: option.name.replace(/[\s.]/g, '').toUpperCase(),
         exhibitionName: `${option.company.name} - ${option.name}`,
         shippingPrice: Number(option.price),

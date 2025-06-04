@@ -29,7 +29,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={`Order Details - #${orderId}`}
+      title={"Order Details"}
       className="w-full max-w-3xl"
     >
       <div className="mb-4 flex items-center justify-between">
