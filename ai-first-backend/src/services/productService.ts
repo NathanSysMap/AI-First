@@ -113,7 +113,7 @@ export function generateProductTemplate(): Buffer {
         imageUrl: 'https://exemplo.com/imagem.jpg',
         stock: 50,
         active: true,
-        ProductType: 'PRODUTO',
+        productType: 'PRODUTO',
         tags: 'algodão,elastano'
     }];
 

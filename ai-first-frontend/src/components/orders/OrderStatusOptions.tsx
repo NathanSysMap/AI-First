@@ -1,9 +1,9 @@
 export const orderStatusOptions = [
-    {value: 'open', label: 'Em Aberto'},
-    {value: 'accepted', label: 'Aceito'},
-    {value: 'refused', label: 'Recusado'},
-    {value: 'preparation', label: 'Em Preparação'},
-    {value: 'transit', label: 'Em Deslocamento'},
-    {value: 'suspended', label: 'Suspenso'},
-    {value: 'completed', label: 'Concluído'},
+    {value: 'ABERTO', label: 'Em Aberto'},
+    {value: 'ACEITO', label: 'Aceito'},
+    {value: 'RECUSADO', label: 'Recusado'},
+    {value: 'PREPARACAO', label: 'Em Preparação'},
+    {value: 'DESLOCAMENTO', label: 'Em Deslocamento'},
+    {value: 'SUSPENSO', label: 'Suspenso'},
+    {value: 'CONCLUIDO', label: 'Concluído'},
 ] as const;

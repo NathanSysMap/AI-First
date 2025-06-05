@@ -46,13 +46,13 @@ export const OrderStatusBadge: React.FC<OrderStatusBadgeProps> = ({
     }
   };
 
-  /*const statusInfo = statusMap[status];
+  const statusInfo = statusMap[status];
 
   if(!statusInfo){
     return (
       <span className={cn('rounded-full px-2 py-1 text-xs font-medium bg-gray-500/20 text-gray-400', className)}>Unknown</span>
     )
-  }*/
+  }
 
   const { label, className: statusClassName } = statusMap[status];
 

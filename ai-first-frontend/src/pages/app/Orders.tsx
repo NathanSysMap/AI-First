@@ -221,7 +221,7 @@ const Orders: React.FC = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {orders.filter((order) => ['completed', 'refused', 'suspended'].includes(order.status)).map((order) => (
+                {orders.filter((order) => ['CONCLUIDO', 'RECUSADO', 'SUSPENSO'].includes(order.status)).map((order) => (
                   <TableRow key={order.id}>
                     <TableCell className="font-medium">#{order.id}</TableCell>
                     <TableCell>{formatPrice(order.total)}</TableCell>
