@@ -15,10 +15,9 @@ interface AddProductModalProps {
 }
 
 const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
-  const { createProduct } = useApi();
+  const { createProduct, uploadImage } = useApi();
   const { user, token } = useAuth();
 
-  console.log('Token no modal: ', token);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -34,6 +33,7 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
   const [type, setType] = useState<ProductType>('PRODUTO');
   const [tags, setTags] = useState('');
   const [image, setImage] = useState('');
+  const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
 
@@ -53,6 +53,7 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
     setType('PRODUTO');
     setTags('');
     setImage('');
+    setFile(null);
     setErrors({});
   };
 
@@ -84,6 +85,12 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
     if (!validateForm()) return;
 
     try {
+      let imageUrl = image;
+
+      if(file) {
+        imageUrl = await uploadImage(file, "product-images");
+      }
+
       const tagsArray = tags
         .split(',')
         .map(tag => tag.trim())
@@ -104,7 +111,7 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
         active,
         productType: type,
         tags: tagsArray,
-        image: image || "https://source.unsplash.com/random/200x200?${category.toLowerCase()},product",
+        imageUrl: imageUrl || "https://source.unsplash.com/random/200x200?${category.toLowerCase()},product",
         createdById: user?.id,
       });
       
@@ -130,9 +137,16 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
             </div>
             <div className="flex-1">
               <Input
-                placeholder="Image URL"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
+                type="file"
+                accept="image/"
+                onChange={(e) => {
+                  const selected = e.target.files?.[0];
+                  if(selected){
+                    setFile(selected);
+                    const preview = URL.createObjectURL(selected);
+                    setImage(preview);
+                  }
+                }}
               />
             </div>
           </div>

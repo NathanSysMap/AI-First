@@ -39,6 +39,25 @@ export const useApi = () => {
         return respondeBody;
     };
 
+    const uploadImage = async (file: File, bucket: string): Promise<string> => {
+        const formData = new FormData();
+        formData.append("image", file);
+        formData.append("bucket", bucket);
+
+        const res = await fetch(`${API_BASE}/products/upload-image`, {
+            method: "POST",
+            headers: {Authorization: `Bearer ${token}`},
+            body: formData,
+        });
+
+        if(!res.ok){
+            throw new Error("Erro ao enviar imagem!");
+        }
+
+        const {imageUrl} = await res.json();
+        return imageUrl;
+    }
+
     const fetchOrders = async () => {
         const res = await fetch(`${API_BASE}/orders/tenant`, {
             headers: getAuthHeaders(),
@@ -47,6 +66,20 @@ export const useApi = () => {
         const data: Order[] = await res.json();
         return data;
     };
+
+    const changeOrderStatus = async (orderId: string, newStatus: string) => {
+        const res = await fetch(`${API_BASE}/orders/${orderId}/status`, {
+            method: 'PATCH',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({status: newStatus}),
+        });
+
+        if(!res.ok){
+            throw new Error("Erro ao atualizar o status do pedido!");
+        }
+
+        return res.json();
+    }
 
     const updateUser = async (data: any) => {
         const res = await fetch(`${API_BASE}/auth/update`, {
@@ -80,6 +113,6 @@ export const useApi = () => {
         return data;
     };
 
-    return { fetchProducts, createProduct, fetchOrders, updateUser, fetchCompanyData, fetchCompanyUsers };
+    return { fetchProducts, createProduct, uploadImage, fetchOrders, changeOrderStatus, updateUser, fetchCompanyData, fetchCompanyUsers };
 }
 

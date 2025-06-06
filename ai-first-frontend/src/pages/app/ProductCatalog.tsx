@@ -24,7 +24,7 @@ const ProductCatalog: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [produtos, setProdutos] = useState<Product[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const { fetchProducts, createProduct } = useApi();
+  const { fetchProducts } = useApi();
 
   useEffect(() => {
     const getProducts = async () => {

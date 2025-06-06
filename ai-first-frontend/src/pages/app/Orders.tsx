@@ -64,20 +64,20 @@ const Orders: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [orders, setOnGoingOrders] = useState<Order[]>([]);
-  const { fetchOrders } = useApi();
+  const { fetchOrders, changeOrderStatus } = useApi();
 
   useEffect(() => {
-      const getOrders = async () => {
-        try {
-          const data = await fetchOrders();
-          setOnGoingOrders(data);
-        } catch (err) {
-          console.error("Ocorreu um erro ao carregar os pedidos!", err);
-        }
-  
+    const getOrders = async () => {
+      try {
+        const data = await fetchOrders();
+        setOnGoingOrders(data);
+      } catch (err) {
+        console.error("Ocorreu um erro ao carregar os pedidos!", err);
       }
-      getOrders();
-    }, []);
+
+    }
+    getOrders();
+  }, []);
 
   const handleViewDetails = (order: Order) => {
     setSelectedOrder(order);
@@ -89,26 +89,28 @@ const Orders: React.FC = () => {
     setSelectedOrder(null);
   };
 
-  const handleStatusChange = (orderId: string, status: string, checked: boolean) => {
-    console.log(`Order ${orderId} status ${status}: ${checked}`);
-    // In a real app, you would update the order status here
-  };
-
   const formatPrice = (value: number) =>
     new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
     }).format(value);
 
-  const handleOrderStatusChange = (
+  const handleOrderStatusChange = async (
     orderId: string,
     newStatus: 'ABERTO' | 'ACEITO' | 'RECUSADO' | 'PREPARACAO' | 'DESLOCAMENTO' | 'SUSPENSO' | 'CONCLUIDO' | 'CANCELADO'
   ) => {
-    setOnGoingOrders((prev) =>
-      prev.map((ord) =>
-        ord.id === orderId ? { ...ord, status: newStatus } : ord
-      )
-    );
+    try {
+      await changeOrderStatus(orderId, newStatus);
+
+      setOnGoingOrders((prev) =>
+        prev.map((ord) =>
+          ord.id === orderId ? { ...ord, status: newStatus } : ord
+        )
+      );
+    } catch (err) {
+      console.error('Erro ao atualizar o status do pedido: ', err);
+    }
+    
   };
 
   const filteredOrders = orders.filter((o) => {
@@ -163,7 +165,7 @@ const Orders: React.FC = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredOrders.map((order) => (
+                {filteredOrders.filter((order) => !['CONCLUIDO', 'RECUSADO', 'SUSPENSO'].includes(order.status)).map((order) => (
                   <TableRow key={order.id}>
                     <TableCell className="font-medium">#{order.id}</TableCell>
                     <TableCell>{formatPrice(order.total)}</TableCell>
@@ -178,25 +180,25 @@ const Orders: React.FC = () => {
                         View Details
                       </Button>
                     </TableCell>
-                    
+
                     <TableCell>
-                    <div className="flex items-center space-x-2">
-                      <select
-                        className="form-input py-1 text-xs"
-                        value={order.status}
-                        onChange={(e) =>
-                          handleOrderStatusChange(
-                            order.id,
-                            e.target.value as Order['status']
-                          )
-                        }
-                      >
-                        {orderStatusOptions.map((opt) => (
-                          <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}                  
-                      </select>
-                    </div>
-                  </TableCell>
+                      <div className="flex items-center space-x-2">
+                        <select
+                          className="form-input py-1 text-xs"
+                          value={order.status}
+                          onChange={(e) =>
+                            handleOrderStatusChange(
+                              order.id,
+                              e.target.value as Order['status']
+                            )
+                          }
+                        >
+                          {orderStatusOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

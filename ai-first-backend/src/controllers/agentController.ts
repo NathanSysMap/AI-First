@@ -12,18 +12,8 @@ export async function uploadAgentDocumentHandler(req: userRequest, res: Response
         const file = req.file;
         const tenantId = req.user!.tenantId;
 
-        const { fileUrl, extractedText } = await uploadAgentDocument(file!, tenantId);
-
-        const doc = await prisma.agentDocument.create({
-            data: {
-                tenantId,
-                name: file!.originalname,
-                fileUrl,
-                content: extractedText,
-            },
-        });
-
-        res.status(200).json({ message: "Documento enviado com sucesso!", document: doc });
+        const { fileUrl, extractedText, documentId, skipped } = await uploadAgentDocument(file!, tenantId);
+        res.status(200).json({ message: skipped ? "Documento ignorado por similaridade" : "Documento enviado com sucesso!", documentId, fileUrl});
     } catch (err: any) {
         res.status(400).json({ error: err.message });
     }
