@@ -1,5 +1,5 @@
 import { error } from "console";
-import { upsertCart, getCart, removeItemFromCart, calcShippingCart, getCartDimensions } from "../services/cartService.js";
+import { upsertCart, getCart, removeItemFromCart, calcShippingCart, getCartDimensions, deleteCart } from "../services/cartService.js";
 import { Request, Response } from "express";
 
 export async function upsertCartHandler(req:Request, res:Response) {
@@ -46,4 +46,15 @@ export async function calcShippingCartHandler(req:Request, res:Response) {
         res.status(500).json({error: err.message});
     }
 };
+
+export async function deleteCarteHandler(req:Request, res:Response) {
+    const {tenantId, customerPhone} = req.params;
+
+    try{
+        const deleteResult = await deleteCart(tenantId, customerPhone);
+        res.status(200).json(deleteResult);
+    } catch(err: any){
+        res.status(500).json({error: err.message});
+    }
+}
 

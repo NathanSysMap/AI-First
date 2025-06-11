@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import cartRouter from "../routes/cartRoutes";
 
 const prisma = new PrismaClient();
 
@@ -241,4 +242,17 @@ export async function calcShippingCart(cartId: string, destinyZipCode: string) {
     }));
 
     return shippingOptions;
+}
+
+export async function deleteCart(tenantId:string, customerPhone:string) {
+    const selectedCart = await prisma.cart.findFirst({
+        where: {tenantId, customerPhone, status: "ATIVO"},
+    });
+
+    if(selectedCart) {
+        await prisma.cartItem.deleteMany({where: {cartId: selectedCart.id}});
+        await prisma.cart.delete({where: {id: selectedCart.id}});
+    }
+
+    return {message: "Carrinho excluído com sucesso!"};
 }
